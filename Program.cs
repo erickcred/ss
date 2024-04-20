@@ -18,13 +18,11 @@ void ExibirLogo()
 void ExibirOpcoesDoMenu()
 {
   ExibirLogo();
-  Console.WriteLine();
-  Console.WriteLine("Digite 1 para registrar uma banda");
+  Console.WriteLine("\r\nDigite 1 para registrar uma banda");
   Console.WriteLine("Digite 2 para mostras todas as bandas");
   Console.WriteLine("Digite 3 para avaliar uma banda");
   Console.WriteLine("Digite 4 para exibir a média de uma banda");
-  Console.WriteLine("Digite -1 para sair");
-  Console.WriteLine();
+  Console.WriteLine("Digite -1 para sair\r\n");
 
   try
   {
@@ -71,15 +69,13 @@ void RegistrarBanda()
 {
   Console.Clear();
   ExibirTituloDaOpcao("Registro de bandas");
-  Console.WriteLine();
 
   Console.Write("Digite o nome da banda que deseja: ");
   string nomeDaBanda = Console.ReadLine()!;
 
   listaDasBandas.Add(nomeDaBanda);
 
-  Console.WriteLine();
-  Console.WriteLine($"A banda ({nomeDaBanda}) foi registrada com sucesso");
+  Console.WriteLine($"\r\nA banda ({nomeDaBanda}) foi registrada com sucesso");
   Thread.Sleep(2000);
 
   Console.Clear();
@@ -90,7 +86,6 @@ void MostrarbandasRegistradas()
 {
   Console.Clear();
   ExibirTituloDaOpcao("Exibindo todas as bandas registradas");
-  Console.WriteLine();
 
   if (listaDasBandas.Count <= 0)
   {
@@ -103,8 +98,7 @@ void MostrarbandasRegistradas()
   foreach (string nomeDaBanda in listaDasBandas)
     Console.WriteLine($"Banda: {nomeDaBanda}");
 
-  Console.WriteLine();
-  Console.WriteLine("Digite uma tecla para voltar a menu principal");
+  Console.WriteLine("\r\nDigite uma tecla para voltar a menu principal");
 
   Console.ReadLine();
   Console.Clear();
@@ -113,13 +107,11 @@ void MostrarbandasRegistradas()
 
 void ExibirTituloDaOpcao(string titulo)
 {
-  string caractere = string.Empty;
-  for (int i = 0; i < titulo.Length; i++)
-    caractere += "*";
+  string asteriscos = string.Empty.PadLeft(titulo.Length, '*');
 
-  Console.WriteLine(caractere);
+  Console.WriteLine(asteriscos);
   Console.WriteLine(titulo);
-  Console.WriteLine(caractere);
+  Console.WriteLine($"{asteriscos}\r\n");
 }
 
 ExibirOpcoesDoMenu();

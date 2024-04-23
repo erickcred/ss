@@ -222,13 +222,9 @@ void ExibirAvaliacaoDeBanda()
             Console.Clear();
             ExibirTituloDaOpcao("Avaliações da Banda");
             Console.Write($"Banda {nomeDaBanda} - ");
-            double media = 0;
-            foreach (var banda in listaDasBandas[nomeDaBanda])
-            {
-              media += banda;
-            }
-            double mediaArre = Math.Ceiling(media / listaDasBandas.Count);
-            Console.WriteLine($"{mediaArre} estrela(s)");
+            List<int> media = listaDasBandas[nomeDaBanda];
+
+            Console.WriteLine($"{Math.Ceiling(media.Average())} estrela(s)");
 
             Console.Write("\r\nGostaria de ver outra banda? \r\n1 - Sim \r\n2 - Não e (Voltar ao menu principal): ");
             selecionarOutraBanda = Console.ReadLine() == "1" ? true : false;
@@ -247,7 +243,7 @@ void ExibirAvaliacaoDeBanda()
         while (selecionarOutraBanda);
 
         Console.WriteLine("Voltando para o menu principal");
-        Thread.Sleep(4000);
+        Thread.Sleep(2000);
         Console.Clear();
         ExibirOpcoesDoMenu();
         break;

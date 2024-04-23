@@ -206,7 +206,6 @@ void ExibirAvaliacaoDeBanda()
         Console.Write("Digite o nome da banda que deseja ver as avaliações: ");
         string nomeDaBanda = Console.ReadLine()!;
 
-
         bool bandaExite = listaDasBandas.ContainsKey(nomeDaBanda);
         if (bandaExite)
         {
@@ -226,6 +225,8 @@ void ExibirAvaliacaoDeBanda()
         }
         else
         {
+          Console.Clear();
+          ExibirTituloDaOpcao("Avaliações da Banda");
           Console.WriteLine("Banda não localizada.\r\nDeseja ver outra banda?");
           Console.WriteLine("1 - selecionar banda para ver avaliações");
           Console.WriteLine("2 - Voltar para o Menu principal");
@@ -244,6 +245,8 @@ void ExibirAvaliacaoDeBanda()
       ExibirOpcoesDoMenu();
       break;
     default:
+      Console.Clear();
+      ExibirTituloDaOpcao("Avaliações da Banda"); ;
       Console.WriteLine("Porfavor escolha uma opção valida");
       Console.WriteLine("1 - selecionar banda para ver avaliação");
       Console.WriteLine("2 - Voltar para o Menu principal");

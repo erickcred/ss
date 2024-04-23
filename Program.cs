@@ -34,7 +34,7 @@ void ExibirOpcoesDoMenu()
     Console.Write("Digite sua opção: ");
     string opcaoEscolhida = Console.ReadLine()!;
     int opcaoEscolhidaNumerica = int.Parse(opcaoEscolhida);
-    
+
     switch (opcaoEscolhidaNumerica)
     {
       case 1:
@@ -59,7 +59,8 @@ void ExibirOpcoesDoMenu()
         ExibirOpcoesDoMenu();
         break;
     }
-  } catch (Exception ex)
+  }
+  catch (Exception ex)
   {
     Console.Clear();
     Console.WriteLine($"Entrada invalida -> {ex.Message}");
@@ -112,7 +113,7 @@ void MostrarbandasRegistradas()
   }
 
   foreach (string nomeDaBanda in listaDasBandas.Keys)
-      Console.WriteLine($"Banda: {nomeDaBanda}");
+    Console.WriteLine($"Banda: {nomeDaBanda}");
 
   Console.WriteLine("\r\nDigite uma tecla para voltar a menu principal");
 
@@ -195,67 +196,77 @@ void ExibirAvaliacaoDeBanda()
   Console.WriteLine("2 - Voltar para o Menu principal");
   string opcaoEscolhida = Console.ReadLine()!;
 
-  switch (opcaoEscolhida)
+  try
   {
-    case "1":
-      bool selecionarOutraBanda = false;
-      do
-      {
-        Console.Clear();
-        ExibirTituloDaOpcao("Avaliações da Banda");
-        Console.Write("Digite o nome da banda que deseja ver as avaliações: ");
-        string nomeDaBanda = Console.ReadLine()!;
-
-        bool bandaExite = listaDasBandas.ContainsKey(nomeDaBanda);
-        if (bandaExite)
+    switch (opcaoEscolhida)
+    {
+      case "1":
+        bool selecionarOutraBanda = false;
+        do
         {
           Console.Clear();
           ExibirTituloDaOpcao("Avaliações da Banda");
-          Console.Write($"Banda {nomeDaBanda} - ");
-          double media = 0;
-          foreach (var banda in listaDasBandas[nomeDaBanda])
+          Console.Write("Digite o nome da banda que deseja ver as avaliações: ");
+          string nomeDaBanda = Console.ReadLine()!;
+
+          bool bandaExite = listaDasBandas.ContainsKey(nomeDaBanda);
+          if (bandaExite)
           {
-            media += banda;
+            Console.Clear();
+            ExibirTituloDaOpcao("Avaliações da Banda");
+            Console.Write($"Banda {nomeDaBanda} - ");
+            double media = 0;
+            foreach (var banda in listaDasBandas[nomeDaBanda])
+            {
+              media += banda;
+            }
+            double mediaArre = Math.Ceiling(media / listaDasBandas.Count);
+            Console.WriteLine($"{mediaArre} estrela(s)");
+
+            Console.Write("\r\nGostaria de ver outra banda? \r\n1 - Sim \r\n2 - Não e (Voltar ao menu principal): ");
+            selecionarOutraBanda = Console.ReadLine() == "1" ? true : false;
           }
-          double mediaArre = Math.Ceiling(media / listaDasBandas.Count);
-          Console.WriteLine($"{mediaArre} estrela(s)");
+          else
+          {
+            Console.Clear();
+            ExibirTituloDaOpcao("Avaliações da Banda");
+            Console.WriteLine("Banda não localizada.\r\nDeseja ver outra banda?");
+            Console.WriteLine("1 - selecionar banda para ver avaliações");
+            Console.WriteLine("2 - Voltar para o Menu principal");
 
-          Console.Write("\r\nGostaria de ver outra banda? \r\n1 - Sim \r\n2 - Não e (Voltar ao menu principal): ");
-          selecionarOutraBanda = Console.ReadLine() == "1"? true : false;
+            opcaoEscolhida = Console.ReadLine()!;
+          }
         }
-        else
-        {
-          Console.Clear();
-          ExibirTituloDaOpcao("Avaliações da Banda");
-          Console.WriteLine("Banda não localizada.\r\nDeseja ver outra banda?");
-          Console.WriteLine("1 - selecionar banda para ver avaliações");
-          Console.WriteLine("2 - Voltar para o Menu principal");
+        while (selecionarOutraBanda);
 
-          opcaoEscolhida = Console.ReadLine()!;
-        }
-      }
-      while (selecionarOutraBanda);
-      Console.WriteLine("Voltando para o menu principal");
-      Thread.Sleep(4000);
-      Console.Clear();
-      ExibirOpcoesDoMenu();
-      break;
-    case "2":
-      Console.Clear();
-      ExibirOpcoesDoMenu();
-      break;
-    default:
-      Console.Clear();
-      ExibirTituloDaOpcao("Avaliações da Banda"); ;
-      Console.WriteLine("Porfavor escolha uma opção valida");
-      Console.WriteLine("1 - selecionar banda para ver avaliação");
-      Console.WriteLine("2 - Voltar para o Menu principal");
+        Console.WriteLine("Voltando para o menu principal");
+        Thread.Sleep(4000);
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+        break;
+      case "2":
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+        break;
+      default:
+        Console.Clear();
+        ExibirAvaliacaoDeBanda();
+        break;
+    }
+  }
+  catch (Exception ex)
+  {
+    Console.Clear();
+    ExibirTituloDaOpcao("Avaliações da Banda"); ;
+    Console.WriteLine("Porfavor escolha uma opção valida");
+    Console.WriteLine("1 - selecionar banda para ver avaliação");
+    Console.WriteLine("2 - Voltar para o Menu principal");
 
-      opcaoEscolhida = Console.ReadLine()!;
-      break;
+    opcaoEscolhida = Console.ReadLine()!;
   }
 
-  
+
+
 
 }
 

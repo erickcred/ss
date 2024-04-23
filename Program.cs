@@ -10,6 +10,7 @@ listaDasBandas.Add("Ira", new List<int> { 1, 2, 10 });
 
 void ExibirLogo()
 {
+  Console.ForegroundColor = ConsoleColor.Yellow;
   Console.WriteLine(@"
 ░██████╗░█████╗░██████╗░███████╗███████╗███╗░░██╗  ░██████╗░█████╗░██╗░░░██╗███╗░░██╗██████╗░
 ██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝████╗░██║  ██╔════╝██╔══██╗██║░░░██║████╗░██║██╔══██╗
@@ -17,6 +18,7 @@ void ExibirLogo()
 ░╚═══██╗██║░░██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║  ░╚═══██╗██║░░██║██║░░░██║██║╚████║██║░░██║
 ██████╔╝╚█████╔╝██║░░██║███████╗███████╗██║░╚███║  ██████╔╝╚█████╔╝╚██████╔╝██║░╚███║██████╔╝
 ╚═════╝░░╚════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝  ╚═════╝░░╚════╝░░╚═════╝░╚═╝░░╚══╝╚═════╝░");
+  Console.ForegroundColor = ConsoleColor.White;
   Console.WriteLine(mensageDeBoasVindas);
 }
 
@@ -126,9 +128,13 @@ void ExibirTituloDaOpcao(string titulo)
 {
   string asteriscos = string.Empty.PadLeft(titulo.Length, '*');
 
+  Console.ForegroundColor = ConsoleColor.Yellow;
   Console.WriteLine(asteriscos);
+  Console.ForegroundColor = ConsoleColor.Blue;
   Console.WriteLine(titulo);
+  Console.ForegroundColor = ConsoleColor.Yellow;
   Console.WriteLine($"{asteriscos}\r\n");
+  Console.ForegroundColor = ConsoleColor.White;
 }
 
 void AvaliacaoUmaBanda()
@@ -142,13 +148,14 @@ void AvaliacaoUmaBanda()
 
   if (bandaExiste)
   {
-    Console.Write($"Qual a nota que a banda ({nomeDaBanda}) merece");
+    Console.Write($"Qual a nota que a banda ({nomeDaBanda}) merece: ");
     int nota = int.Parse(Console.ReadLine()!);
 
     listaDasBandas[nomeDaBanda].Add(nota);
 
     Console.WriteLine($"\r\nA nota {nota} foi registrada com sucesso para a banda {nomeDaBanda}");
     Thread.Sleep(4000);
+    Console.Clear();
     ExibirOpcoesDoMenu();
   }
   else

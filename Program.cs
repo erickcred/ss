@@ -6,6 +6,7 @@ string mensageDeBoasVindas = "Boas vindas ao Screen Sound";
 Dictionary<string, List<int>> listaDasBandas = new Dictionary<string, List<int>>();
 listaDasBandas.Add("Link Park", new List<int> { 1, 2, 10 });
 listaDasBandas.Add("The Beatles", new List<int>());
+listaDasBandas.Add("Ira", new List<int> { 1, 2, 10 });
 
 void ExibirLogo()
 {
@@ -46,7 +47,7 @@ void ExibirOpcoesDoMenu()
         AvaliacaoUmaBanda();
         break;
       case 4:
-        Console.WriteLine($"opção escolhida: {opcaoEscolhidaNumerica}");
+        ExibirAvaliacaoDeBanda();
         break;
       case -1:
         Console.WriteLine($"{opcaoEscolhidaNumerica} saindo do sitema");
@@ -140,7 +141,14 @@ void AvaliacaoUmaBanda()
 
   if (bandaExiste)
   {
+    Console.Write($"Qual a nota que a banda ({nomeDaBanda}) merece");
+    int nota = int.Parse(Console.ReadLine()!);
 
+    listaDasBandas[nomeDaBanda].Add(nota);
+
+    Console.WriteLine($"\r\nA nota {nota} foi registrada com sucesso para a banda {nomeDaBanda}");
+    Thread.Sleep(4000);
+    ExibirOpcoesDoMenu();
   }
   else
   {
@@ -175,9 +183,76 @@ void AvaliacaoUmaBanda()
           opcaoEscolhidaNumerica = int.Parse(opcaoEscolhida);
           break;
       }
-    
+  }
+}
+
+void ExibirAvaliacaoDeBanda()
+{
+  Console.Clear();
+  ExibirTituloDaOpcao("Avaliações da Banda");
+
+  Console.WriteLine("1 - selecionar banda para ver avaliação");
+  Console.WriteLine("2 - Voltar para o Menu principal");
+  string opcaoEscolhida = Console.ReadLine()!;
+
+  switch (opcaoEscolhida)
+  {
+    case "1":
+      bool selecionarOutraBanda = false;
+      do
+      {
+        Console.Clear();
+        ExibirTituloDaOpcao("Avaliações da Banda");
+        Console.Write("Digite o nome da banda que deseja ver as avaliações: ");
+        string nomeDaBanda = Console.ReadLine()!;
+
+
+        bool bandaExite = listaDasBandas.ContainsKey(nomeDaBanda);
+        if (bandaExite)
+        {
+          Console.Clear();
+          ExibirTituloDaOpcao("Avaliações da Banda");
+          Console.Write($"Banda {nomeDaBanda} - ");
+          double media = 0;
+          foreach (var banda in listaDasBandas[nomeDaBanda])
+          {
+            media += banda;
+          }
+          double mediaArre = Math.Ceiling(media / listaDasBandas.Count);
+          Console.WriteLine($"{mediaArre} estrela(s)");
+
+          Console.Write("\r\nGostaria de ver outra banda? \r\n1 - Sim \r\n2 - Não e (Voltar ao menu principal): ");
+          selecionarOutraBanda = Console.ReadLine() == "1"? true : false;
+        }
+        else
+        {
+          Console.WriteLine("Banda não localizada.\r\nDeseja ver outra banda?");
+          Console.WriteLine("1 - selecionar banda para ver avaliações");
+          Console.WriteLine("2 - Voltar para o Menu principal");
+
+          opcaoEscolhida = Console.ReadLine()!;
+        }
+      }
+      while (selecionarOutraBanda);
+      Console.WriteLine("Voltando para o menu principal");
+      Thread.Sleep(4000);
+      Console.Clear();
+      ExibirOpcoesDoMenu();
+      break;
+    case "2":
+      Console.Clear();
+      ExibirOpcoesDoMenu();
+      break;
+    default:
+      Console.WriteLine("Porfavor escolha uma opção valida");
+      Console.WriteLine("1 - selecionar banda para ver avaliação");
+      Console.WriteLine("2 - Voltar para o Menu principal");
+
+      opcaoEscolhida = Console.ReadLine()!;
+      break;
   }
 
+  
 
 }
 
